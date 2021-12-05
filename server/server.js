@@ -7,7 +7,7 @@ express()
   .use(express.json())
   //ENDPOINTS
 
-  //ENDPOINTS^^^^^
+  //ENDPOINTS
 
   .listen(PORT, function () {
     console.info("🌍 Listening on port " + PORT);
