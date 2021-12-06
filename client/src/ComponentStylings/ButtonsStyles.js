@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-export const LogInOutButton = styled.button``;
+export const BasicButton = styled.button``;
 
 export const ProfileLinkButton = styled(NavLink)`
   text-decoration: none;
