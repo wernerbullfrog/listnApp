@@ -1,15 +1,22 @@
 import React from "react";
-import { PageContainer, ListnLogo } from "../ComponentStylings/PageStyles";
+import { PageContainer } from "../ComponentStylings/PageStyles";
 import LoginBtn from "../Buttons/LoginBtn";
 import LogoutButton from "../Buttons/LogOutBtn";
-import Profile from "./ProfilePage";
+import ProfileLink from "../Buttons/ProfileLink";
+import ListnLogoLink from "../Buttons/ListnLogoLink";
+import { useAuth0 } from "@auth0/auth0-react";
 const LandingPage = () => {
+  const { isAuthenticated } = useAuth0();
   return (
     <PageContainer>
-      <ListnLogo>listn'</ListnLogo>
-      <LoginBtn />
-      <LogoutButton />
-      <Profile />
+      <ListnLogoLink />
+      {!isAuthenticated && <LoginBtn />}
+      <ProfileLink />
+      {isAuthenticated && (
+        <>
+          <LogoutButton />
+        </>
+      )}
     </PageContainer>
   );
 };
