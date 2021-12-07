@@ -9,6 +9,7 @@ const RoomCreationForm = () => {
   const [name, setName] = useState("");
   const [checked, setChecked] = useState(false);
   const [passcode, setPasscode] = useState("");
+
   return (
     <>
       <InputWrapper>
