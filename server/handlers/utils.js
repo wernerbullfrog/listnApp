@@ -1,8 +1,8 @@
 // client connect
-const activateConn = async (client, dbName, colName) => {
+const activateConn = async (client, colName) => {
   await client.connect();
   console.log("connected");
-  const db = client.db(dbName);
+  const db = client.db();
   const col = await db.collection(colName);
   return col;
 };
