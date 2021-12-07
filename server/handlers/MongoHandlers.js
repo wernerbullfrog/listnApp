@@ -1,10 +1,15 @@
+"use strict";
+const { MongoClient } = require("mongodb");
+
 require("dotenv").config();
 const { MONGO_URI } = process.env;
-const MongoClient = require("mongodb");
+
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
+
+const { v4: uuidv4 } = require("uuid");
 
 const { activateConn, deactivateConn, response } = require("./utils");
 
@@ -82,30 +87,23 @@ const getPrivateRooms = async (req, res) => {
 ////////////////////////////////////////////////////////////////////////
 // ********************* CREATE ROOM HANDLER **********************//
 //////////////////////////////////////////////////////////////////////
-// const addReservations = async (req, res) => {
-//   const client = new MongoClient(MONGO_URI, options);
-//   try {
-//     const conn = await activateConn(client, "listn'", req.params.roomType);
-//     const db = client.db();
-//     const query = { _id: req.body.flight, "seats.id": req.body.seat };
-//     const newRes = { _id: uuidv4(), ...req.body };
-//     await db.collection("reservations").insertOne({ ...newRes });
-
-//         res.status(200).json({ status: 200, reservation: newRes });
-//       }
-//     } else {
-//       res
-//         .status(400)
-//         .json({ status: 400, message: "selected seat is not available" });
-//     }
-//   } catch (error) {
-//     res.status(400).json({ status: 400, message: "server error" });
-//   } finally {
-//     client.close();
-//   }
-// };
+const addRoom = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db();
+    const newRoom = { _id: uuidv4(), ...req.body };
+    await db.collection(req.params.roomType).insertOne({ ...newRoom });
+    res.status(200).json({ status: 200, Room: newRoom });
+  } catch (error) {
+    res.status(400).json({ status: 400, message: "server error" });
+  } finally {
+    client.close();
+  }
+};
 
 module.exports = {
   getPublicRooms,
   getPrivateRooms,
+  addRoom,
 };

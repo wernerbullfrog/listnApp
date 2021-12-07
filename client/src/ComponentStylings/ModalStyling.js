@@ -14,11 +14,12 @@ export const StyledModal = styled(ModalUnstyled)`
 `;
 
 export const ModalBox = styled.div`
-  width: 400px;
-  height: 400px;
+  height: 22em;
+  width: 15em;
   background-color: black;
   box-shadow: 0px 0px 46px -15px rgba(300, 300, 300, 0.1);
   border-radius: 15px;
+  border: solid thick rgba(153, 153, 153, 0.35);
 `;
 
 export const Backdrop = styled.div`
@@ -28,6 +29,6 @@ export const Backdrop = styled.div`
   bottom: 0;
   top: 0;
   left: 0;
-  background-color: rgba(222, 125, 241, 0.1);
+  background-color: rgba(300, 300, 300, 0.1);
   -webkit-tap-highlight-color: transparent;
 `;

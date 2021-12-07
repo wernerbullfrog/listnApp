@@ -27,3 +27,7 @@ export const DesciptiveTxt = styled.span`
   color: white;
   font-size: 20px;
 `;
+
+export const SubmitButton = styled.input.attrs({
+  type: "submit",
+})``;
