@@ -102,8 +102,49 @@ const addRoom = async (req, res) => {
   }
 };
 
+const joinRoom = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    const conn = await activateConn(client, req.body.roomType);
+    const roomQuery = { _id: req.body._id };
+    const newRoomUser = {
+      $addToSet: {
+        roomUsers: req.body.currentUser,
+      },
+    };
+    const result = await conn.updateOne(roomQuery, newRoomUser);
+    res.status(200).json({ status: 200, updatedRoom: result });
+    console.log(result);
+  } catch (error) {
+    res.status(400).json({ status: 400, message: " server Error " });
+  } finally {
+    deactivateConn(client);
+  }
+};
+
+const leaveRoom = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    const conn = await activateConn(client, req.body.roomType);
+    const roomQuery = { _id: req.body._id };
+    const newRoomUser = {
+      $unSet: {
+        roomUsers: req.body.currentUser,
+      },
+    };
+    const result = await conn.updateOne(roomQuery, newRoomUser);
+    res.status(200).json({ status: 200, updatedRoom: result });
+  } catch (error) {
+    res.status(400).json({ status: 400, message: " server Error " });
+  } finally {
+    deactivateConn(client);
+  }
+};
+
 module.exports = {
   getRooms,
   getAllRooms,
   addRoom,
+  joinRoom,
+  leaveRoom,
 };

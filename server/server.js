@@ -1,6 +1,12 @@
 const express = require("express");
 const morgan = require("morgan");
-const { getRooms, addRoom, getAllRooms } = require("./handlers/MongoHandlers");
+const {
+  getRooms,
+  addRoom,
+  getAllRooms,
+  joinRoom,
+  leaveRoom,
+} = require("./handlers/MongoHandlers");
 const PORT = 8000;
 
 express()
@@ -11,6 +17,8 @@ express()
   .get("/api/rooms/:roomType", getRooms)
   .get("/api/rooms", getAllRooms)
   .post("/api/:roomType", addRoom)
+  .patch("/api/rooms/", joinRoom)
+  .patch("/api/rooms/", leaveRoom)
 
   //ENDPOINTS
   .get("*", (req, res) => {

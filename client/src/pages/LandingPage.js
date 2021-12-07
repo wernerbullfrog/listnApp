@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PageContainer } from "../ComponentStylings/PageStyles";
+import { PageContainer, PageWrapper } from "../ComponentStylings/PageStyles";
 import LoginBtn from "../Buttons/LoginBtn";
 import LogoutButton from "../Buttons/LogOutBtn";
 import ProfileLink from "../Buttons/ProfileLink";
@@ -12,19 +12,21 @@ const LandingPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   return (
     <PageContainer>
-      <ListnLogoLink />
-      {!isAuthenticated && <LoginBtn />}
-      <ProfileLink />
-      {isAuthenticated && (
-        <>
-          <CreateRoomBtn setModalOpen={setModalOpen} />
-          <RoomCreationModal
-            modalOpen={modalOpen}
-            setModalOpen={setModalOpen}
-          />
-          <LogoutButton />
-        </>
-      )}
+      <PageWrapper>
+        <ListnLogoLink />
+        {!isAuthenticated && <LoginBtn />}
+        {isAuthenticated && (
+          <>
+            <CreateRoomBtn setModalOpen={setModalOpen} />
+            <RoomCreationModal
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+            />
+            <LogoutButton />
+            <ProfileLink />
+          </>
+        )}
+      </PageWrapper>
     </PageContainer>
   );
 };

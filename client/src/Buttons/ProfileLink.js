@@ -1,17 +1,15 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
-import {
-  ProfileLinkButton,
-  DesciptiveTxt,
-} from "../ComponentStylings/ButtonsStyles";
+import { ProfileLinkButton } from "../ComponentStylings/ButtonsStyles";
+import { LinkWrapper } from "../ComponentStylings/PageStyles";
+
 const ProfileLink = () => {
   return (
-    <ProfileLinkButton to="/profile">
-      <FaUserCircle>
-        {" "}
-        <DesciptiveTxt>Profile</DesciptiveTxt>
-      </FaUserCircle>
-    </ProfileLinkButton>
+    <LinkWrapper>
+      <ProfileLinkButton to="/profile">
+        <FaUserCircle />
+      </ProfileLinkButton>
+    </LinkWrapper>
   );
 };
 
