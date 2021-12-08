@@ -20,6 +20,25 @@ export const BasicButton = styled.button`
   }
 `;
 
+export const ModalCardBtn = styled.button`
+  width: 100px;
+  height: 35px;
+  cursor: pointer;
+  font-size: large;
+  font-weight: thin;
+  margin: 10px;
+  background-color: rgba(255, 141, 75, 0.3);
+  color: black;
+  border: rgba(255, 141, 75, 0.6) solid thin;
+  border-radius: 30px;
+  transition: all 0.15s ease-in;
+  :hover {
+    color: rgba(255, 141, 75, 0.62);
+    background-color: transparent;
+    border: solidrgba(255, 141, 75, 0.7);
+  }
+`;
+
 export const ProfileLinkButton = styled(NavLink)`
   text-decoration: none;
   color: white;

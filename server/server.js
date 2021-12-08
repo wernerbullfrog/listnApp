@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const {
   getRooms,
@@ -11,14 +12,15 @@ const PORT = 8000;
 
 express()
   .use(morgan("tiny"))
+  .use(bodyParser.json())
   .use(express.json())
   .use(express.static("public"))
   //ENDPOINTS
   .get("/api/rooms/:roomType", getRooms)
-  .get("/api/rooms", getAllRooms)
+  .get("/api/rooms/", getAllRooms)
   .post("/api/:roomType", addRoom)
-  .patch("/api/rooms/", joinRoom)
-  .patch("/api/rooms/", leaveRoom)
+  .patch("/api/rooms", joinRoom)
+  .patch("/api/rooms", leaveRoom)
 
   //ENDPOINTS
   .get("*", (req, res) => {

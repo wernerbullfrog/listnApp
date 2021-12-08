@@ -29,6 +29,6 @@ export const Backdrop = styled.div`
   bottom: 0;
   top: 0;
   left: 0;
-  background-color: rgba(300, 300, 300, 0.1);
-  -webkit-tap-highlight-color: transparent;
+
+  /* -webkit-tap-highlight-color: transparent; */
 `;
