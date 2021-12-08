@@ -13,73 +13,60 @@ const { v4: uuidv4 } = require("uuid");
 
 const { activateConn, deactivateConn, response } = require("./utils");
 
-/////////////////////////////////////////////////////////////////////
-// ********************* PUBLIC ROOM HANDLERS *********************//
-/////////////////////////////////////////////////////////////////////
-const getPublicRooms = async (req, res) => {
+////////////////////////////////////////////////////////////////////////
+// ********************* getROOMS HANDLERS **********************//
+//////////////////////////////////////////////////////////////////////
+const getRooms = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   try {
-    const conn = await activateConn(client, "listn'", "PublicRooms");
+    const conn = await activateConn(client, req.params.roomType);
     //the commented code below is for pagination
-    // const limit = parseInt(req.query.limit);
-    // const offset = parseInt(req.query.page) * limit;
-    await conn
+    //   const limit = parseInt(req.query.limit)
+    //   const offset = parseInt(req.query.page) * limit
+    const result = await conn
       .find()
       //the commented code below is for pagination
       //   .skip(offset)
       //   .limit(limit)
-      .toArray((err, result) => {
-        if (err) {
-          response(res, 404, "Data Not Found");
-        } else {
-          response(
-            res,
-            200,
-            "Successefully retrieved all public rooms!",
-            result
-          );
-        }
-        deactivateConn(client);
-      });
+      .toArray();
+
+    res.status(200).json({ status: 200, rooms: result });
+
+    deactivateConn(client);
   } catch (error) {
     response(res, 500, "Server Error");
   }
 };
 
-// const getSinglePublicRoom =  async (req, res) => {
-//   const client = new MongoClient(MONGO_URI, options);
-//   try{
-//     const conn = await activateConn(client, "listn'", "PublicRooms");
-//   }
-// }
 ////////////////////////////////////////////////////////////////////////
-// ********************* Private ROOM HANDLERS **********************//
+// ********************* getAllROOMS HANDLERS **********************//
 //////////////////////////////////////////////////////////////////////
-const getPrivateRooms = async (req, res) => {
+const getAllRooms = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   try {
-    const conn = await activateConn(client, "listn'", "PrivateRooms");
+    const privateConn = await activateConn(client, "private");
+    const punlicConn = await activateConn(client, "public");
     //the commented code below is for pagination
     //   const limit = parseInt(req.query.limit)
     //   const offset = parseInt(req.query.page) * limit
-    await conn
+    let privateResult = await privateConn
       .find()
       //the commented code below is for pagination
       //   .skip(offset)
       //   .limit(limit)
-      .toArray((err, result) => {
-        if (err) {
-          response(res, 404, "Data Not Found");
-        } else {
-          response(
-            res,
-            200,
-            "Successefully retrieved all private rooms!",
-            result
-          );
-        }
-        deactivateConn(client);
-      });
+      .toArray();
+    let publicResult = await punlicConn
+      .find()
+      //the commented code below is for pagination
+      //   .skip(offset)
+      //   .limit(limit)
+      .toArray();
+    res.status(200).json({
+      status: 200,
+      privateRooms: privateResult,
+      publicRooms: publicResult,
+    });
+    deactivateConn(client);
   } catch (error) {
     response(res, 500, "Server Error");
   }
@@ -90,20 +77,74 @@ const getPrivateRooms = async (req, res) => {
 const addRoom = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   try {
-    await client.connect();
-    const db = client.db();
-    const newRoom = { _id: uuidv4(), ...req.body };
-    await db.collection(req.params.roomType).insertOne({ ...newRoom });
+    const conn = await activateConn(client, req.params.roomType);
+    const newRoom = {
+      _id: uuidv4(),
+      ...req.body,
+    };
+    const rooms = await conn.find().toArray();
+    let roomAlreadyExists = rooms.find(
+      (room) => room.Name.toLowerCase() === req.body.Name.toLowerCase()
+    );
+    if (roomAlreadyExists) {
+      res.status(400).json({
+        status: 400,
+        message: `the room name:${roomAlreadyExists.Name} is already taken`,
+      });
+    } else {
+      await conn.insertOne({ ...newRoom });
+    }
     res.status(200).json({ status: 200, Room: newRoom });
   } catch (error) {
     res.status(400).json({ status: 400, message: "server error" });
   } finally {
-    client.close();
+    deactivateConn(client);
+  }
+};
+
+const joinRoom = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    const conn = await activateConn(client, req.body.roomType);
+    const roomQuery = { _id: req.body._id };
+    const newRoomUser = {
+      $addToSet: {
+        roomUsers: req.body.currentUser,
+      },
+    };
+    const result = await conn.updateOne(roomQuery, newRoomUser);
+    res.status(200).json({ status: 200, updatedRoom: result });
+    console.log(result);
+  } catch (error) {
+    res.status(400).json({ status: 400, message: " server Error " });
+  } finally {
+    deactivateConn(client);
+  }
+};
+
+const leaveRoom = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    const conn = await activateConn(client, req.body.roomType);
+    const roomQuery = { _id: req.body._id };
+    const newRoomUser = {
+      $unSet: {
+        roomUsers: req.body.currentUser,
+      },
+    };
+    const result = await conn.updateOne(roomQuery, newRoomUser);
+    res.status(200).json({ status: 200, updatedRoom: result });
+  } catch (error) {
+    res.status(400).json({ status: 400, message: " server Error " });
+  } finally {
+    deactivateConn(client);
   }
 };
 
 module.exports = {
-  getPublicRooms,
-  getPrivateRooms,
+  getRooms,
+  getAllRooms,
   addRoom,
+  joinRoom,
+  leaveRoom,
 };

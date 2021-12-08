@@ -1,9 +1,11 @@
 const express = require("express");
 const morgan = require("morgan");
 const {
-  getPublicRooms,
-  getPrivateRooms,
+  getRooms,
   addRoom,
+  getAllRooms,
+  joinRoom,
+  leaveRoom,
 } = require("./handlers/MongoHandlers");
 const PORT = 8000;
 
@@ -12,9 +14,11 @@ express()
   .use(express.json())
   .use(express.static("public"))
   //ENDPOINTS
-  .get("/api/rooms/public", getPublicRooms)
-  .get("/api/rooms/private", getPrivateRooms)
+  .get("/api/rooms/:roomType", getRooms)
+  .get("/api/rooms", getAllRooms)
   .post("/api/:roomType", addRoom)
+  .patch("/api/rooms/", joinRoom)
+  .patch("/api/rooms/", leaveRoom)
 
   //ENDPOINTS
   .get("*", (req, res) => {
