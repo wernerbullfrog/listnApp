@@ -26,7 +26,7 @@ export const CardWrapper = styled.li`
     margin-left: -5px;
   }
   :hover {
-    transform: translateY(-20px) translateX(-20px);
+    transform: translateY(-10px) translateX(-10px);
     transition: 0.4s ease-out;
   }
 `;
@@ -35,4 +35,21 @@ export const Title = styled.p`
   font-weight: 100;
   left: 20px;
   top: 15px;
+`;
+
+export const UsersWrapper = styled.div`
+  display: flex;
+  border-top: solid thin white;
+  width: auto;
+`;
+
+export const UserImage = styled.img`
+  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+  opacity: 60%;
+  border-radius: 100%;
+  :not(:first-child) {
+    margin-left: -5px;
+  }
 `;

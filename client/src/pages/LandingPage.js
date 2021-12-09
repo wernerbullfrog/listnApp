@@ -9,7 +9,7 @@ import CreateRoomBtn from "../Buttons/CreateRoomBtn";
 import RoomCreationModal from "../Modals/RoomCreationModal";
 import { RoomContext } from "../Contexts/RoomContext";
 import RoomCarousel from "./RoomCarousel";
-
+import LinearProgress from "@mui/material/LinearProgress";
 const LandingPage = () => {
   const { isAuthenticated, user } = useAuth0();
   const [modalOpen, setModalOpen] = useState(false);
@@ -56,7 +56,7 @@ const LandingPage = () => {
       </PageWrapper>
     </PageContainer>
   ) : (
-    <div>loading</div>
+    <LinearProgress color="secondary" />
   );
 };
 

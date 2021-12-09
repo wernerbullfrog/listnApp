@@ -1,21 +1,46 @@
+// FUNCTIONS AND UTILS //
 import React, { useState } from "react";
-import { BasicButton, SubmitButton } from "../ComponentStylings/ButtonsStyles";
+import { handleSubmit } from "../functions/handler";
+//* VARIABLES * //
+import { useAuth0 } from "@auth0/auth0-react";
+////////////////////////////////////////
+//************* STYLING **************//
+///////////////////////////////////////
+import { ModalCardBtn, SubmitButton } from "../ComponentStylings/ButtonsStyles";
 import {
   StyledModal,
   Backdrop,
   ModalBox,
 } from "../ComponentStylings/ModalStyling";
-import RoomCreationForm from "../Inputs/RoomCreationForm";
 import {
   CreateRoomForm,
   FormButtonWrapper,
 } from "../ComponentStylings/FormStylings";
+////////////////////////////////////////
+//************ Components ************//
+///////////////////////////////////////
+
+import RoomCreationForm from "../Inputs/RoomCreationForm";
+
 const RoomCreationModal = ({ modalOpen, setModalOpen }) => {
   const [closeModal, setCloseModal] = useState(false);
   const handleClose = () => {
     setCloseModal(true);
     setModalOpen(false);
   };
+  const { user } = useAuth0();
+  const [roomType, setRoomType] = useState("public");
+  const [roomName, setRoomName] = useState("");
+  const [passcode, setPasscode] = useState("");
+
+  const formData = {
+    roomName: roomName,
+    passcode: passcode,
+    roomType: roomType,
+    currentUser: { userName: user.nickname, profileImg: user.picture },
+    roomUsers: [{ userName: user.nickname, profileImg: user.picture }],
+  };
+  console.log(formData);
   return (
     <>
       <StyledModal
@@ -26,10 +51,20 @@ const RoomCreationModal = ({ modalOpen, setModalOpen }) => {
         BackdropComponent={Backdrop}
       >
         <ModalBox>
-          <CreateRoomForm onSubmit={() => alert("YA DID IT")}>
-            <RoomCreationForm />
+          <CreateRoomForm
+            onSubmit={(e) => {
+              handleSubmit(e, formData, roomType);
+              handleClose();
+            }}
+          >
+            <RoomCreationForm
+              setRoomName={setRoomName}
+              setPasscode={setPasscode}
+              setRoomType={setRoomType}
+              formData={formData}
+            />
             <FormButtonWrapper>
-              <BasicButton onClick={() => handleClose()}>Close</BasicButton>
+              <ModalCardBtn onClick={() => handleClose()}>Close</ModalCardBtn>
               <SubmitButton type="submit" value="Create!" />
             </FormButtonWrapper>
           </CreateRoomForm>

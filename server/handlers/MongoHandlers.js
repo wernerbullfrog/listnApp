@@ -84,7 +84,7 @@ const addRoom = async (req, res) => {
     };
     const rooms = await conn.find().toArray();
     let roomAlreadyExists = rooms.find(
-      (room) => room.Name.toLowerCase() === req.body.Name.toLowerCase()
+      (room) => room.roomName.toLowerCase() === req.body.roomName.toLowerCase()
     );
     if (roomAlreadyExists) {
       res.status(400).json({
