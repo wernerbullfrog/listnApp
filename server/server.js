@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const {
   getRooms,
   addRoom,
+  getRoom,
   getAllRooms,
   joinRoom,
   leaveRoom,
@@ -18,6 +19,7 @@ express()
   //ENDPOINTS
   .get("/api/rooms/:roomType", getRooms)
   .get("/api/rooms/", getAllRooms)
+  .get("/api/:roomType/:_id", getRoom)
   .post("/api/:roomType", addRoom)
   .patch("/api/rooms", joinRoom)
   .patch("/api/rooms", leaveRoom)

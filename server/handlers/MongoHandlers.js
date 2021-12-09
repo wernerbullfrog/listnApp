@@ -14,7 +14,7 @@ const { v4: uuidv4 } = require("uuid");
 const { activateConn, deactivateConn, response } = require("./utils");
 
 ////////////////////////////////////////////////////////////////////////
-// ********************* getROOMS HANDLERS **********************//
+// ********************* getROOMSBYID HANDLERS **********************//
 //////////////////////////////////////////////////////////////////////
 const getRooms = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
@@ -38,6 +38,21 @@ const getRooms = async (req, res) => {
   }
 };
 
+////////////////////////////////////////////////////////////////////////
+// ********************* getROOMS HANDLERS **********************//
+//////////////////////////////////////////////////////////////////////
+const getRoom = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    const conn = await activateConn(client, req.params.roomType);
+    const _id = req.params._id;
+    const result = await conn.findOne({ _id });
+    res.status(200).json({ status: 200, result });
+  } catch (error) {
+    res.status(404).json({ status: 404, message: "no room Found" });
+  }
+  deactivateConn(client);
+};
 ////////////////////////////////////////////////////////////////////////
 // ********************* getAllROOMS HANDLERS **********************//
 //////////////////////////////////////////////////////////////////////
@@ -101,7 +116,9 @@ const addRoom = async (req, res) => {
     deactivateConn(client);
   }
 };
-
+////////////////////////////////////////////////////////////////////////
+// ********************* JOIN ROOM HANDLER **********************//
+//////////////////////////////////////////////////////////////////////
 const joinRoom = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   try {
@@ -121,6 +138,10 @@ const joinRoom = async (req, res) => {
     deactivateConn(client);
   }
 };
+
+////////////////////////////////////////////////////////////////////////
+// ********************* LEAVE ROOM HANDLER **********************//
+//////////////////////////////////////////////////////////////////////
 
 const leaveRoom = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
@@ -143,6 +164,7 @@ const leaveRoom = async (req, res) => {
 
 module.exports = {
   getRooms,
+  getRoom,
   getAllRooms,
   addRoom,
   joinRoom,
