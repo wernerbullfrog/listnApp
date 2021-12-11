@@ -15,6 +15,7 @@ const deactivateConn = async (client) => {
 
 // response format
 const response = (res, code, msg, result) => {
+  console.error(msg);
   return res.status(code).json({ status: code, data: result, message: msg });
 };
 

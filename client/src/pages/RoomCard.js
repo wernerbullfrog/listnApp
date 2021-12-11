@@ -1,4 +1,5 @@
 import React from "react";
+import RoomCurrentUsers from "./RoomCurrentUsers";
 import {
   CardWrapper,
   Title,
@@ -7,15 +8,12 @@ import {
 } from "../ComponentStylings/CardStylings";
 import JoinBtn from "../Buttons/JoinBtn";
 const RoomCard = ({ room }) => {
-  console.log(room.roomUsers.forEach((user) => console.log(user.profileImg)));
   return (
     <CardWrapper>
       <Title>{room.roomName}</Title>
       <UsersWrapper>
         <Title>other listn'rs</Title>
-        {room.roomUsers.map((user) => (
-          <UserImage src={user.profileImg} />
-        ))}
+        <RoomCurrentUsers room={room} />
       </UsersWrapper>
       <JoinBtn room={room} />
     </CardWrapper>

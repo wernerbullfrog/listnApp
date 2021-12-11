@@ -17,6 +17,7 @@ const { activateConn, deactivateConn, response } = require("./utils");
 // ********************* getROOMSBYID HANDLERS **********************//
 //////////////////////////////////////////////////////////////////////
 const getRooms = async (req, res) => {
+  console.log("wazzuu");
   const client = new MongoClient(MONGO_URI, options);
   try {
     const conn = await activateConn(client, req.params.roomType);
@@ -30,11 +31,14 @@ const getRooms = async (req, res) => {
       //   .limit(limit)
       .toArray();
 
-    res.status(200).json({ status: 200, rooms: result });
+    // console.log("res", result);
 
-    deactivateConn(client);
+    res.status(200).json({ status: 200, rooms: result });
   } catch (error) {
+    console.log("error", error);
     response(res, 500, "Server Error");
+  } finally {
+    await deactivateConn(client);
   }
 };
 

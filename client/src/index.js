@@ -11,7 +11,7 @@ ReactDOM.render(
     <Auth0Provider
       domain={process.env.REACT_APP_AUTH0_DOMAIN}
       clientId={process.env.REACT_APP_AUTH0_CLIENTID}
-      redirectUri="https://10.0.0.195:3000/"
+      redirectUri="http://localhost:3000"
     >
       <App />
     </Auth0Provider>
