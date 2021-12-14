@@ -9,9 +9,9 @@ import {
 const RoomCurrentUsers = ({ room }) => {
   console.log(room);
   return room.roomUsers ? (
-    <UsersWrapper>
+    <UsersWrapper key={Math.random() * 460000000}>
       {room.roomUsers.map((user) => (
-        <UserImage src={user.profileImg} />
+        <UserImage key={Math.random() * 460000000} src={user.profileImg} />
       ))}
     </UsersWrapper>
   ) : (

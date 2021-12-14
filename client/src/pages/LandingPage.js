@@ -11,7 +11,7 @@ import { RoomContext } from "../Contexts/RoomContext";
 import RoomCarousel from "./RoomCarousel";
 import LinearProgress from "@mui/material/LinearProgress";
 const LandingPage = () => {
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const [modalOpen, setModalOpen] = useState(false);
   const {
     state: { Rooms },
@@ -34,7 +34,7 @@ const LandingPage = () => {
         });
     }
   }, [isAuthenticated]);
-
+  console.log(user);
   return Rooms ? (
     <PageContainer>
       <PageWrapper>

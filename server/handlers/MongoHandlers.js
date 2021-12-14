@@ -1,4 +1,3 @@
-"use strict";
 const { MongoClient } = require("mongodb");
 
 require("dotenv").config();
@@ -17,10 +16,10 @@ const { activateConn, deactivateConn, response } = require("./utils");
 // ********************* getROOMSBYID HANDLERS **********************//
 //////////////////////////////////////////////////////////////////////
 const getRooms = async (req, res) => {
-  console.log("wazzuu");
   const client = new MongoClient(MONGO_URI, options);
   try {
     const conn = await activateConn(client, req.params.roomType);
+
     //the commented code below is for pagination
     //   const limit = parseInt(req.query.limit)
     //   const offset = parseInt(req.query.page) * limit
@@ -30,9 +29,7 @@ const getRooms = async (req, res) => {
       //   .skip(offset)
       //   .limit(limit)
       .toArray();
-
     // console.log("res", result);
-
     res.status(200).json({ status: 200, rooms: result });
   } catch (error) {
     console.log("error", error);
@@ -62,9 +59,11 @@ const getRoom = async (req, res) => {
 //////////////////////////////////////////////////////////////////////
 const getAllRooms = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
+
   try {
     const privateConn = await activateConn(client, "private");
     const punlicConn = await activateConn(client, "public");
+
     //the commented code below is for pagination
     //   const limit = parseInt(req.query.limit)
     //   const offset = parseInt(req.query.page) * limit

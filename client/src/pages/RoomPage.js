@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RoomCurrentUsers from "./RoomCurrentUsers";
 import { LinearProgress } from "@mui/material";
-const Room = () => {
+import WebPlayback from "./SpotifyPlayer";
+import Login from "./Login";
+import { RoomContext } from "../Contexts/RoomContext";
+const Room = ({ code }) => {
   const { roomType, _id } = useParams();
   const [currentRoom, setCurrentRoom] = useState({});
+  const { token } = useContext(RoomContext);
+
+  useEffect(() => {
+    fetch("/login");
+  });
   useEffect(() => {
     fetch(`/api/${roomType}/${_id}`)
       .then((res) => res.json())
@@ -12,7 +20,6 @@ const Room = () => {
         setCurrentRoom(data.result);
       });
   }, []);
-  console.log(currentRoom);
   return (
     <>
       {currentRoom ? (
@@ -23,10 +30,9 @@ const Room = () => {
             <button>Skip</button>
             <button>Bump</button>
           </div>
-          <p>
-            current listn'rs'
-            <RoomCurrentUsers room={currentRoom} />
-          </p>
+          {token === "" ? <Login /> : <WebPlayback token={token} />}
+          <p>current listn'rs'</p>
+          <RoomCurrentUsers room={currentRoom} />
           <p>
             interation bar (includes spotify buttons to follow artist/ like song
             / etc)

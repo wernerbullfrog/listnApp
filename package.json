@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "http-proxy-middleware": "^2.0.1",
+    "react-spotify-web-playback": "^0.9.1",
+    "request": "^2.88.2",
+    "spotify-web-api-node": "^5.0.2"
+  }
+}

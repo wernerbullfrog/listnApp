@@ -4,7 +4,6 @@ import {
   CardWrapper,
   Title,
   UsersWrapper,
-  UserImage,
 } from "../ComponentStylings/CardStylings";
 import JoinBtn from "../Buttons/JoinBtn";
 const RoomCard = ({ room }) => {

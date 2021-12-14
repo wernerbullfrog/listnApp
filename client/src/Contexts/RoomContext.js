@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useState } from "react";
 const initialState = {
   Rooms: null,
 };
@@ -18,6 +18,7 @@ const reducer = (state, action) => {
 };
 
 export const RoomProvider = ({ children }) => {
+  const [token, setToken] = useState("");
   const [state, dispatch] = useReducer(reducer, initialState);
   const receiveRoomsFromServer = (data) => {
     dispatch({
@@ -33,6 +34,8 @@ export const RoomProvider = ({ children }) => {
     <RoomContext.Provider
       value={{
         state,
+        setToken,
+        token,
         actions: {
           receiveRoomsFromServer,
         },

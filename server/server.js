@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+
 const {
   getRooms,
   addRoom,
@@ -9,6 +10,11 @@ const {
   joinRoom,
   leaveRoom,
 } = require("./handlers/MongoHandlers");
+const {
+  requestAccessToken,
+  requestUserAuth,
+  returnAccessToken,
+} = require("./handlers/spotifyHandlers");
 const PORT = 8000;
 
 express()
@@ -16,15 +22,18 @@ express()
   .use(bodyParser.json())
   .use(express.json())
   .use(express.static("public"))
-  //ENDPOINTS
+  //MONGO ENDPOINTS
   .get("/api/rooms/:roomType", getRooms)
   .get("/api/rooms/", getAllRooms)
   .get("/api/:roomType/:_id", getRoom)
   .post("/api/:roomType", addRoom)
   .patch("/api/rooms", joinRoom)
   .patch("/api/rooms", leaveRoom)
+  //SPOTIFY ENDPOINTS
+  .get("/auth/login", requestUserAuth)
+  .get("/callback/:code", requestAccessToken)
+  .get("/auth/token/:token", returnAccessToken)
 
-  //ENDPOINTS
   .get("*", (req, res) => {
     res.status(404).json({
       status: 404,
