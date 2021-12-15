@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Login = () => {
-  const [setDataState] = useState("");
+  // const [setDataState] = useState("");
   // const handleClick = () => {
   //   fetch("/auth/login", {
   //     headers: {

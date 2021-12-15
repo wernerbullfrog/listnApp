@@ -6,14 +6,18 @@ import { RoomContext } from "../Contexts/RoomContext";
 const Callback = ({ code }) => {
   const { setToken } = useContext(RoomContext);
   const navigate = useNavigate();
+  let thisRoomType = localStorage.getItem("thisRoomType");
+  let room_Id = localStorage.getItem("room_id");
   useEffect(() => {
-    fetch(`/callback/${code}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setToken(data.access_token);
-        navigate("/");
-      });
-  }, []);
+    if (thisRoomType && room_Id) {
+      fetch(`/callback/${code}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setToken(data.access_token);
+          navigate(`/${thisRoomType}/${room_Id}`);
+        });
+    } else return;
+  }, [thisRoomType, room_Id]);
   return <LinearProgress />;
 };
 

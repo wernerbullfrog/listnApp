@@ -18,6 +18,8 @@ const reducer = (state, action) => {
 
 export const RoomProvider = ({ children }) => {
   const [token, setToken] = useState("");
+  const [thisRoomType, setThisRoomType] = useState("");
+  const [room_Id, setRoom_Id] = useState("");
   const [state, dispatch] = useReducer(reducer, initialState);
   const receiveRoomsFromServer = (data) => {
     dispatch({
@@ -27,13 +29,16 @@ export const RoomProvider = ({ children }) => {
       },
     });
   };
-
   return (
     <RoomContext.Provider
       value={{
         state,
         setToken,
         token,
+        thisRoomType,
+        setThisRoomType,
+        room_Id,
+        setRoom_Id,
         actions: {
           receiveRoomsFromServer,
         },

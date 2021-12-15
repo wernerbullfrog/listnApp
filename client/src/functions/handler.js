@@ -16,6 +16,56 @@ export const handleSubmit = (e, formData, roomType) => {
     .catch(console.log("error has occured"));
 };
 
+export const handleJoin = (user, room) => {
+  let userInfo = {};
+  if (user && room) {
+    userInfo = {
+      user: { userName: user.nickname, profileImg: user.picture },
+      _id: room._id,
+      roomType: room.roomType,
+    };
+  }
+  fetch(`/api/rooms/`, {
+    method: "PATCH",
+    body: JSON.stringify(userInfo),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((json) => {
+      const { status, error } = json;
+      console.log("status: ", status, "Error:", error);
+    })
+    .catch(console.log("error has occured"));
+};
+
+export const handleAddSong = (song, room) => {
+  let songInfo = {};
+  if (song && room) {
+    songInfo = {
+      playedSongs: song,
+      _id: room._id,
+      roomType: room.roomType,
+    };
+  }
+  fetch(`/api/addSongs/`, {
+    method: "PATCH",
+    body: JSON.stringify(songInfo),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((json) => {
+      const { status, error } = json;
+      console.log("status: ", status, "Error:", error);
+    })
+    .catch(console.log("error has occured"));
+};
+
 export const getToken = async (token, setToken) => {
   const response = await fetch("http://localhost:8000/auth/token");
   const json = await response.json();

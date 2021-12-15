@@ -24,6 +24,7 @@ const LandingPage = () => {
         .then((res) => res.json())
         .then((data) => {
           receiveRoomsFromServer(data);
+          console.log(user);
         });
     } else {
       fetch(`/api/rooms/public`)
@@ -33,7 +34,6 @@ const LandingPage = () => {
         });
     }
   }, [isAuthenticated]);
-
   return Rooms ? (
     <PageContainer>
       <PageWrapper>

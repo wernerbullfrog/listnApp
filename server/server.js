@@ -9,6 +9,7 @@ const {
   getAllRooms,
   joinRoom,
   leaveRoom,
+  addSong,
 } = require("./handlers/MongoHandlers");
 const {
   requestAccessToken,
@@ -28,6 +29,7 @@ express()
   .get("/api/:roomType/:_id", getRoom)
   .post("/api/:roomType", addRoom)
   .patch("/api/rooms", joinRoom)
+  .patch("/api/addSong", addSong)
   .patch("/api/rooms", leaveRoom)
   //SPOTIFY ENDPOINTS
   .get("/auth/login", requestUserAuth)

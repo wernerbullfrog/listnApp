@@ -6,23 +6,30 @@ import WebPlayback from "./SpotifyPlayer";
 import Login from "./Login";
 import { RoomContext } from "../Contexts/RoomContext";
 import SearchMusic from "../Inputs/SearchMusic";
-import { ListnLogoLinkButton } from "../ComponentStylings/ButtonsStyles";
 import ListnLogoLink from "../Buttons/ListnLogoLink";
 
 const Room = ({ code }) => {
   const { roomType, _id } = useParams();
   const [currentRoom, setCurrentRoom] = useState({});
-  const { token } = useContext(RoomContext);
+  const { token, setThisRoomType, setRoom_Id, thisRoomType, room_Id } =
+    useContext(RoomContext);
   const [searchSongs, setsearchSongs] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState();
+  useEffect(() => {
+    setRoom_Id(_id);
+    setThisRoomType(roomType);
+  }, []);
+  localStorage.setItem("thisRoomType", thisRoomType);
+  localStorage.setItem("room_id", room_Id);
+
   const chooseTrack = (track) => {
     setPlayingTrack(track);
     setsearchSongs("");
   };
   useEffect(() => {
     fetch("/login");
-  });
+  }, []);
   useEffect(() => {
     fetch(`/api/${roomType}/${_id}`)
       .then((res) => res.json())
@@ -30,6 +37,7 @@ const Room = ({ code }) => {
         setCurrentRoom(data.result);
       });
   }, []);
+
   return (
     <>
       <ListnLogoLink />
@@ -39,15 +47,15 @@ const Room = ({ code }) => {
           {playingTrack ? (
             <>
               <h2>song on deck</h2>
-              <span>
+              <h3>
                 {playingTrack.title} by: {playingTrack.artist}
-              </span>
+              </h3>
             </>
           ) : (
-            <div>
+            <h3>
               looks like nothings playing yet. Search for your favorite tune to
               get things going!
-            </div>
+            </h3>
           )}
           {/* <div>
             <button>Skip</button>
