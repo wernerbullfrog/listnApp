@@ -30,7 +30,6 @@ export const Backdrop = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.6);
-  /* -webkit-tap-highlight-color: transparent; */
 `;
 
 export const PasscodeModalBox = styled.div`
