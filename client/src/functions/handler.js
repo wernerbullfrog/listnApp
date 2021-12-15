@@ -70,7 +70,6 @@ export const getToken = async (token, setToken) => {
   const response = await fetch("http://localhost:8000/auth/token");
   const json = await response.json();
   setToken(json.access_token);
-  console.log(token);
 };
 
 export const getUserMetadata = async (
