@@ -41,16 +41,16 @@ export const handleJoin = (user, room) => {
     .catch(console.log("error has occured"));
 };
 
-export const handleAddSong = (song, room) => {
+export const handleAddSong = (song, roomType, _id) => {
   let songInfo = {};
-  if (song && room) {
+  if (song && roomType && _id) {
     songInfo = {
-      playedSongs: song,
-      _id: room._id,
-      roomType: room.roomType,
+      song: song,
+      _id: _id,
+      roomType: roomType,
     };
   }
-  fetch(`/api/addSongs/`, {
+  fetch(`/api/addSong/`, {
     method: "PATCH",
     body: JSON.stringify(songInfo),
     headers: {

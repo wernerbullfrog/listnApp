@@ -6,6 +6,9 @@ import { handleJoin } from "../functions/handler";
 
 const JoinBtn = ({ room, setModalOpen }) => {
   const { user } = useAuth0();
+  let userName = {};
+
+  console.log(userName);
   let navigate = useNavigate();
   let allowedUser;
   const handleClick = () => {
@@ -30,13 +33,15 @@ const JoinBtn = ({ room, setModalOpen }) => {
   };
   return (
     <>
-      <ModalCardBtn
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        Join!
-      </ModalCardBtn>
+      {user ? (
+        <ModalCardBtn
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          Join!
+        </ModalCardBtn>
+      ) : null}
     </>
   );
 };

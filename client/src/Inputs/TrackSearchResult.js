@@ -5,9 +5,13 @@ import {
   TitleNameWrapper,
   Artist,
 } from "../ComponentStylings/InputStylings";
+import { useParams } from "react-router";
+import { handleAddSong } from "../functions/handler";
 const TrackSearchResult = ({ track, chooseTrack }) => {
+  const { roomType, _id } = useParams();
   const handlePlay = () => {
     chooseTrack(track);
+    handleAddSong(track, roomType, _id);
   };
   return (
     <ResultContainer

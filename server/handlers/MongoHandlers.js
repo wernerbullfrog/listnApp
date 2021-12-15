@@ -150,12 +150,12 @@ const addSong = async (req, res) => {
   try {
     const conn = await activateConn(client, req.body.roomType);
     const roomQuery = { _id: req.body._id };
-    const newRoomUser = {
+    const newSong = {
       $addToSet: {
         playedSongs: req.body.song,
       },
     };
-    const result = await conn.updateOne(roomQuery, newRoomUser);
+    const result = await conn.updateOne(roomQuery, newSong);
     res.status(200).json({ status: 200, updatedRoom: result });
     console.log(result);
   } catch (error) {
