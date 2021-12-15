@@ -7,7 +7,6 @@ const RoomCarousel = ({ Rooms }) => {
 
   useEffect(() => {
     if (Rooms) {
-      console.log("Rooms:", Rooms);
       if (Rooms.rooms) {
         setDisplayedRooms(Rooms.rooms);
       } else {
@@ -16,8 +15,6 @@ const RoomCarousel = ({ Rooms }) => {
       }
     }
   }, [Rooms]);
-
-  console.log(displayedRooms);
 
   return Rooms ? (
     <CarouselContainer>

@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
-function WebPlayback({ token }) {
+
+function WebPlayback({ token, trackUri }) {
+  const [play, setPlay] = useState(false);
+  useEffect(() => setPlay(true), [trackUri]);
+  if (!token) return null;
   return (
     <SpotifyPlayer
       token={token}
       showSaveIcon
-      uris={["spotify:artist:6HQYnRM4OzToCYPpVBInuU"]}
-      play={true}
+      uris={trackUri ? trackUri : []}
+      callback={(state) => {
+        if (!state.isPlaying) setPlay(false);
+      }}
+      play={play}
       styles={{
         activeColor: "#fff",
         bgColor: "transparant",

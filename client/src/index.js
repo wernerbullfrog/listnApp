@@ -11,8 +11,7 @@ ReactDOM.render(
     <Auth0Provider
       domain={process.env.REACT_APP_AUTH0_DOMAIN}
       clientId={process.env.REACT_APP_AUTH0_CLIENTID}
-      redirectUri="http://localhost:3000/callback"
-      audience="https://dev-cfn37ewf.us.auth0.com/api/v2/"
+      redirectUri="http://localhost:3000/"
       scope="read:current_user update:current_user_metadata"
       useRefreshTokens={true}
     >

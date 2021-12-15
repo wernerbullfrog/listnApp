@@ -11,7 +11,7 @@ import { RoomContext } from "../Contexts/RoomContext";
 import RoomCarousel from "./RoomCarousel";
 import LinearProgress from "@mui/material/LinearProgress";
 const LandingPage = () => {
-  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const [modalOpen, setModalOpen] = useState(false);
   const {
     state: { Rooms },
@@ -29,12 +29,11 @@ const LandingPage = () => {
       fetch(`/api/rooms/public`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           receiveRoomsFromServer(data);
         });
     }
   }, [isAuthenticated]);
-  console.log(user);
+
   return Rooms ? (
     <PageContainer>
       <PageWrapper>

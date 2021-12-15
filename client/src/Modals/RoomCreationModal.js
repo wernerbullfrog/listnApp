@@ -40,7 +40,7 @@ const RoomCreationModal = ({ modalOpen, setModalOpen }) => {
     currentUser: { userName: user.nickname, profileImg: user.picture },
     roomUsers: [{ userName: user.nickname, profileImg: user.picture }],
   };
-  console.log(formData);
+
   return (
     <>
       <StyledModal
