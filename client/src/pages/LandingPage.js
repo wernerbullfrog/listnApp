@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { PageContainer, PageWrapper } from "../ComponentStylings/PageStyles";
+import { useAuth0 } from "@auth0/auth0-react";
+import LinearProgress from "@mui/material/LinearProgress";
+import { RoomContext } from "../Contexts/RoomContext";
+// compoonents
 import LoginBtn from "../Buttons/LoginBtn";
 import LogoutButton from "../Buttons/LogOutBtn";
 import ProfileLink from "../Buttons/ProfileLink";
 import ListnLogoLink from "../Buttons/ListnLogoLink";
-import { useAuth0 } from "@auth0/auth0-react";
 import CreateRoomBtn from "../Buttons/CreateRoomBtn";
 import RoomCreationModal from "../Modals/RoomCreationModal";
-import { RoomContext } from "../Contexts/RoomContext";
 import RoomCarousel from "./RoomCarousel";
-import LinearProgress from "@mui/material/LinearProgress";
+//styles
+import { PageContainer, PageWrapper } from "../ComponentStylings/PageStyles";
+
 const LandingPage = () => {
   const { isAuthenticated, user } = useAuth0();
   const [modalOpen, setModalOpen] = useState(false);

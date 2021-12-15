@@ -84,3 +84,24 @@ export const SubmitButton = styled.input.attrs({
     border: solidrgba(255, 141, 75, 0.7);
   }
 `;
+
+export const LoginLink = styled.a`
+  text-decoration: none;
+  text-align: center;
+  padding: 10px;
+  width: 200px;
+  height: 50px;
+  cursor: pointer;
+  font-size: large;
+  margin: 5px;
+  background-color: rgba(222, 125, 241, 0.6);
+  color: black;
+  border: rgba(222, 125, 241, 0.6) solid;
+  border-radius: 40px;
+  transition: all 0.15s ease-in;
+  :hover {
+    color: rgba(222, 125, 241);
+    background-color: black;
+    border: solid rgba(222, 125, 241);
+  }
+`;

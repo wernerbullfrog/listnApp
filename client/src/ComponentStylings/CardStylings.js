@@ -39,7 +39,6 @@ export const Title = styled.p`
 
 export const UsersWrapper = styled.div`
   display: flex;
-  border-top: solid thin white;
   width: auto;
 `;
 

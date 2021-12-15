@@ -9,7 +9,7 @@ function WebPlayback({ token, trackUri }) {
     <SpotifyPlayer
       token={token}
       showSaveIcon
-      uris={trackUri ? trackUri : []}
+      uris={trackUri ? [trackUri] : []}
       callback={(state) => {
         if (!state.isPlaying) setPlay(false);
       }}

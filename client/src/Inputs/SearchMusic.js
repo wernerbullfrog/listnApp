@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
 
 import { SearchResultContainer } from "../ComponentStylings/InputStylings";
-
+import { Input } from "../ComponentStylings/FormStylings";
 import TrackSearchResult from "./TrackSearchResult";
 const SpotifyApi = new SpotifyWebApi({
   clientId: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
@@ -53,7 +53,7 @@ const SearchMusic = ({
   return (
     <div>
       <form>
-        <input
+        <Input
           type="search"
           placeholder="Search Songs/artists"
           value={searchSongs}

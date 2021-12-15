@@ -31,6 +31,9 @@ export const ProfileWrapper = styled.div`
   align-items: center;
   justify-content: space-around;
 `;
+
+export const BasicWrapper = styled.div``;
+
 //******************************************/
 // ************** TXTS ********************/
 //******************************************/

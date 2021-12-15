@@ -2,7 +2,8 @@ import { LinearProgress } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { RoomContext } from "../Contexts/RoomContext";
-
+// This page is only used from the backend as a redirect
+// to obtain the access token required for the spotify api to work
 const Callback = ({ code }) => {
   const { setToken } = useContext(RoomContext);
   const navigate = useNavigate();

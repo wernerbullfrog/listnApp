@@ -29,6 +29,23 @@ export const Backdrop = styled.div`
   bottom: 0;
   top: 0;
   left: 0;
-
+  background-color: rgba(0, 0, 0, 0.6);
   /* -webkit-tap-highlight-color: transparent; */
+`;
+
+export const PasscodeModalBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 12em;
+  width: 15em;
+  background-color: black;
+  box-shadow: 0px 0px 46px -15px rgba(300, 300, 300, 0.1);
+  border-radius: 15px;
+  border: solid thick rgba(153, 153, 153, 0.35);
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
 `;

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import {
-  ModalBox,
+  PasscodeModalBox,
   StyledModal,
   Backdrop,
+  ButtonWrapper,
 } from "../ComponentStylings/ModalStyling";
 import { ModalCardBtn } from "../ComponentStylings/ButtonsStyles";
 import { handleJoin } from "../functions/handler";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router";
+import { Input } from "../ComponentStylings/FormStylings";
 const PassCodeModal = ({ room, modalOpen, setModalOpen }) => {
   let navigate = useNavigate();
   const { user } = useAuth0();
@@ -32,16 +34,19 @@ const PassCodeModal = ({ room, modalOpen, setModalOpen }) => {
         onClose={closeModal}
         BackdropComponent={Backdrop}
       >
-        <ModalBox>
-          <input
+        <PasscodeModalBox>
+          <h3>Enter the passcode to join!</h3>
+          <Input
             value={inputValue}
             onChange={(e) => {
               setInputValue(e.target.value);
             }}
-          ></input>
-          <ModalCardBtn onClick={() => handleClose()}>Cancel</ModalCardBtn>
-          <ModalCardBtn onClick={() => handleClick()}>JOIN!</ModalCardBtn>
-        </ModalBox>
+          />
+          <ButtonWrapper>
+            <ModalCardBtn onClick={() => handleClose()}>Cancel</ModalCardBtn>
+            <ModalCardBtn onClick={() => handleClick()}>JOIN!</ModalCardBtn>
+          </ButtonWrapper>
+        </PasscodeModalBox>
       </StyledModal>
     </>
   );

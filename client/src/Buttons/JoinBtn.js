@@ -6,8 +6,6 @@ import { handleJoin } from "../functions/handler";
 
 const JoinBtn = ({ room, setModalOpen }) => {
   const { user } = useAuth0();
-  let userName = {};
-
   let navigate = useNavigate();
   let allowedUser;
   const handleClick = () => {

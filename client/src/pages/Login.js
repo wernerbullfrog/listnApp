@@ -1,24 +1,12 @@
 import React from "react";
+import { LoginLink } from "../ComponentStylings/ButtonsStyles";
+import { BasicWrapper } from "../ComponentStylings/PageStyles";
 
 const Login = () => {
-  // const [setDataState] = useState("");
-  // const handleClick = () => {
-  //   fetch("/auth/login", {
-  //     headers: {
-  //       "Access-Control-Allow-Origin":
-  //         "https://accounts.spotify.com/authorize/?",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setDataState(data.result);
-  //     });
-  // };
-
   return (
-    <div>
-      <a href="http://localhost:8000/auth/login">Login with Spotify</a>
-    </div>
+    <LoginLink href="http://localhost:8000/auth/login">
+      connect to Spotify
+    </LoginLink>
   );
 };
 
