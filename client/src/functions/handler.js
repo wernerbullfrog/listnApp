@@ -30,7 +30,6 @@ export const getUserMetadata = async (
   setToken
 ) => {
   const domain = "dev-cfn37ewf.us.auth0.com";
-
   try {
     const accessToken = await getAccessTokenSilently({
       audience: `https://${domain}/api/v2/`,
