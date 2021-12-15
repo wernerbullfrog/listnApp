@@ -43,9 +43,6 @@ const Room = ({ code }) => {
       });
   }, []);
 
-  if (currentRoom) {
-    console.log(currentRoom);
-  }
   return (
     <>
       <RoomContainer>
@@ -67,10 +64,6 @@ const Room = ({ code }) => {
                   to get things going!
                 </h3>
               )}
-              {/* <div>
-            <button>Skip</button>
-            <button>Bump</button>
-          </div> */}
               {token === "" ? (
                 <Login />
               ) : (

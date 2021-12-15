@@ -8,13 +8,11 @@ const JoinBtn = ({ room, setModalOpen }) => {
   const { user } = useAuth0();
   let userName = {};
 
-  console.log(userName);
   let navigate = useNavigate();
   let allowedUser;
   const handleClick = () => {
     room.roomUsers.forEach((roomUser) => {
       allowedUser = roomUser.userName === user.nickname;
-      console.log(room);
     });
     if (room.roomType === "private") {
       if (allowedUser) {

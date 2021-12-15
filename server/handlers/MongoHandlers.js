@@ -29,10 +29,8 @@ const getRooms = async (req, res) => {
       //   .skip(offset)
       //   .limit(limit)
       .toArray();
-    // console.log("res", result);
     res.status(200).json({ status: 200, rooms: result });
   } catch (error) {
-    console.log("error", error);
     response(res, 500, "Server Error");
   } finally {
     await deactivateConn(client);
@@ -134,7 +132,6 @@ const joinRoom = async (req, res) => {
     };
     const result = await conn.updateOne(roomQuery, newRoomUser);
     res.status(200).json({ status: 200, updatedRoom: result });
-    console.log(result);
   } catch (error) {
     res.status(400).json({ status: 400, message: " server Error " });
   } finally {
@@ -157,7 +154,6 @@ const addSong = async (req, res) => {
     };
     const result = await conn.updateOne(roomQuery, newSong);
     res.status(200).json({ status: 200, updatedRoom: result });
-    console.log(result);
   } catch (error) {
     res.status(400).json({ status: 400, message: " server Error " });
   } finally {

@@ -48,19 +48,15 @@ const requestAccessToken = (req, res) => {
   request.post(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       const access_token = body.access_token;
-      // res.redirect(`http://localhost:8000/auth/token/${access_token}`);
       res.json({
         access_token: access_token,
       });
     } else {
-      console.log(response);
     }
   });
 };
 
-const returnAccessToken = (req, res) => {
-  console.log("LOOK MA I MADE IT: ", req.params.token);
-};
+const returnAccessToken = (req, res) => {};
 
 module.exports = {
   requestAccessToken,
