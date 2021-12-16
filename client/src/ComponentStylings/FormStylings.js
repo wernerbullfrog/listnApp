@@ -33,3 +33,15 @@ export const Input = styled.input.attrs({ type: "text" })`
 `;
 
 export const InputWrapper = styled.div``;
+
+export const SongSearchInput = styled.input.attrs({ type: "text" })`
+  width: 700px;
+  height: 60px;
+  font-size: 20px;
+
+  margin: 10px;
+  border-radius: 5px;
+  border: white solid thin;
+  background-color: transparent;
+  color: white;
+`;

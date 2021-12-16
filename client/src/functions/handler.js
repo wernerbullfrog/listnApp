@@ -1,3 +1,4 @@
+// this function posts the formdata to MongoDb
 export const handleSubmit = (e, formData, roomType) => {
   e.preventDefault();
   fetch(`/api/${roomType}`, {
@@ -15,7 +16,7 @@ export const handleSubmit = (e, formData, roomType) => {
     })
     .catch(console.log("error has occured"));
 };
-
+// this function add users to the roomUsers array in mongodb
 export const handleJoin = (user, room) => {
   let userInfo = {};
   if (user && room) {
@@ -40,7 +41,7 @@ export const handleJoin = (user, room) => {
     })
     .catch(console.log("error has occured"));
 };
-
+// this function patches songs to the room songs array in mongodb
 export const handleAddSong = (song, roomType, _id) => {
   let songInfo = {};
   if (song && roomType && _id) {
@@ -65,13 +66,14 @@ export const handleAddSong = (song, roomType, _id) => {
     })
     .catch(console.log("error has occured"));
 };
-
+// this functions retrieves the spotify access token
 export const getToken = async (token, setToken) => {
   const response = await fetch("http://localhost:8000/auth/token");
   const json = await response.json();
   setToken(json.access_token);
 };
 
+// dunno if this is still relevant but will test later and remove if it is not
 export const getUserMetadata = async (
   getAccessTokenSilently,
   user,

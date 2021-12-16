@@ -5,6 +5,8 @@ import {
   Input,
 } from "../ComponentStylings/FormStylings";
 
+// this form is used for getting all the required info for creating a new room
+
 const RoomCreationForm = ({ setRoomName, setPasscode, setRoomType }) => {
   const [checked, setChecked] = useState(false);
   if (checked) {

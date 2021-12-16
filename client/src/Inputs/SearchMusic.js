@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
 
 import { SearchResultContainer } from "../ComponentStylings/InputStylings";
-import { Input } from "../ComponentStylings/FormStylings";
+import { SongSearchInput } from "../ComponentStylings/FormStylings";
 import TrackSearchResult from "./TrackSearchResult";
 const SpotifyApi = new SpotifyWebApi({
   clientId: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
@@ -21,7 +21,7 @@ const SearchMusic = ({
     if (!token) return;
     SpotifyApi.setAccessToken(token);
   }, [token]);
-
+  // this function allows to search for songs and display the possible options
   useEffect(() => {
     if (!searchSongs) return setSearchResults([]);
     if (!token) return;
@@ -37,7 +37,6 @@ const SearchMusic = ({
             },
             track.album.images[0]
           );
-
           return {
             artist: track.artists[0].name,
             title: track.name,
@@ -52,16 +51,15 @@ const SearchMusic = ({
 
   return (
     <div>
-      <form>
-        <Input
-          type="search"
-          placeholder="Search Songs/artists"
-          value={searchSongs}
-          onChange={(e) => {
-            setsearchSongs(e.target.value);
-          }}
-        />
-      </form>
+      <SongSearchInput
+        type="search"
+        placeholder="Search for Songs or Artist "
+        value={searchSongs}
+        onChange={(e) => {
+          setsearchSongs(e.target.value);
+        }}
+      />
+
       <SearchResultContainer>
         {searchResults.map((track) => (
           <TrackSearchResult

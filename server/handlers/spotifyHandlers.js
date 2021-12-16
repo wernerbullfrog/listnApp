@@ -3,7 +3,9 @@ const request = require("request");
 const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = process.env;
 const { generateRandomString } = require("./utils");
 const redirect_uri = "http://localhost:3000/callback";
-
+////////////////////////////////////////////////////////////////////////
+// ************ request spotify to redirect to  login ***************//
+//////////////////////////////////////////////////////////////////////
 const requestUserAuth = (req, res) => {
   const scope =
     " streaming  user-read-email  user-read-private \
@@ -24,7 +26,9 @@ const requestUserAuth = (req, res) => {
     `https://accounts.spotify.com/authorize/?${auth_query_parameters.toString()}`
   );
 };
-
+////////////////////////////////////////////////////////////////////////
+// ******* Request the access token once spotify has approved  ******//
+//////////////////////////////////////////////////////////////////////
 const requestAccessToken = (req, res) => {
   var code = req.params.code;
   var authOptions = {

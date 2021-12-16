@@ -19,6 +19,7 @@ export const AlbumImg = styled.img`
 export const SearchResultContainer = styled.div`
   overflow: scroll;
   height: 300px;
+  width: 700px;
 `;
 
 export const TitleNameWrapper = styled.div`

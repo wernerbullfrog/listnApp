@@ -8,6 +8,14 @@ const JoinBtn = ({ room, setModalOpen }) => {
   const { user } = useAuth0();
   let navigate = useNavigate();
   let allowedUser;
+
+  // this handleClick finds whether the user already has access
+  // to a room by being and "allowedUser" if so the user is immediatly redirected
+  // to the listening rooms page
+  // if not the user is added to the rooms Users then the redirect occurs
+  // if the room is private and the user is not authorized to then the handleClick
+  // opens the passcode modal
+
   const handleClick = () => {
     room.roomUsers.forEach((roomUser) => {
       allowedUser = roomUser.userName === user.nickname;
