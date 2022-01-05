@@ -1,8 +1,9 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import ListnLogoLink from "../Buttons/ListnLogoLink";
+
 import { ProfileWrapper, PageWrapper } from "../ComponentStylings/PageStyles";
 import { LinearProgress } from "@mui/material";
+import LoginBtn from "../Buttons/LoginBtn";
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -12,13 +13,18 @@ const Profile = () => {
         <LinearProgress />
       ) : (
         <>
-          <ListnLogoLink />
-          {isAuthenticated && (
+          {isAuthenticated ? (
             <ProfileWrapper>
               <img src={user.picture} alt={user.name} />
               <h2>{user.name}</h2>
               <p>{user.email}</p>
             </ProfileWrapper>
+          ) : (
+            <>
+              <p>Uh Oh! Looks like you're not logged in </p>
+              <p>click the button below to view your profile</p>
+              <LoginBtn />
+            </>
           )}
         </>
       )}

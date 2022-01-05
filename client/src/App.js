@@ -4,11 +4,12 @@ import LandingPage from "./pages/LandingPage";
 import Profile from "./pages/ProfilePage";
 import Room from "./pages/RoomPage";
 import Callback from "./pages/Callback";
-
+import Header from "./pages/Header";
 const App = () => {
   const code = new URLSearchParams(window.location.search).get("code");
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/profile" element={<Profile />} />

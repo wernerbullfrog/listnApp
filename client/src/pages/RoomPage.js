@@ -7,17 +7,16 @@ import Login from "./Login";
 import { RoomContext } from "../Contexts/RoomContext";
 import PlayedSong from "../pages/PlayedSong";
 import SearchMusic from "../Inputs/SearchMusic";
-import ListnLogoLink from "../Buttons/ListnLogoLink";
-import ProfileLink from "../Buttons/ProfileLink";
+
 import {
   RoomContainer,
   RoomWrapper,
   PlayedTracksWrapper,
-  HeaderWrapper,
   CurrentlyPlayingWrapper,
   CurrentSong,
 } from "../ComponentStylings/RoomStyling";
-const Room = ({ code }) => {
+
+const Room = () => {
   const { roomType, _id } = useParams();
   const [currentRoom, setCurrentRoom] = useState({});
   const { token, setThisRoomType, setRoom_Id, thisRoomType, room_Id } =
@@ -57,10 +56,6 @@ const Room = ({ code }) => {
       {currentRoom ? (
         <RoomContainer>
           <RoomWrapper>
-            <HeaderWrapper>
-              <ListnLogoLink />
-              <ProfileLink />
-            </HeaderWrapper>
             <>
               <h1>{currentRoom.roomName}</h1>
               <RoomCurrentUsers room={currentRoom} />

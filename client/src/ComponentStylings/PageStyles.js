@@ -8,6 +8,14 @@ export const PageContainer = styled.div`
   padding: 0;
 `;
 
+export const HeaderDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 10px;
+  box-shadow: 0px 10px 24px -10px rgba(255, 255, 255, 0.36);
+`;
+
 export const LinkWrapper = styled.div`
   margin: 0;
   transition: all 0.15s ease-in;

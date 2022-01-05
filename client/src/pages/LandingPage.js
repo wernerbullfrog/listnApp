@@ -5,8 +5,6 @@ import { RoomContext } from "../Contexts/RoomContext";
 // compoonents
 import LoginBtn from "../Buttons/LoginBtn";
 import LogoutButton from "../Buttons/LogOutBtn";
-import ProfileLink from "../Buttons/ProfileLink";
-import ListnLogoLink from "../Buttons/ListnLogoLink";
 import CreateRoomBtn from "../Buttons/CreateRoomBtn";
 import RoomCreationModal from "../Modals/RoomCreationModal";
 import RoomCarousel from "./RoomCarousel";
@@ -39,8 +37,6 @@ const LandingPage = () => {
   return Rooms ? (
     <PageContainer>
       <PageWrapper>
-        <ListnLogoLink />
-
         {!isAuthenticated && <LoginBtn />}
         {isAuthenticated && (
           <>
@@ -50,7 +46,6 @@ const LandingPage = () => {
               setModalOpen={setModalOpen}
             />
             <LogoutButton />
-            <ProfileLink />
           </>
         )}
         <RoomCarousel user={user} Rooms={Rooms} />
