@@ -41,6 +41,28 @@ export const handleJoin = (user, room) => {
     })
     .catch(console.log("error has occured"));
 };
+
+// export const handleLeave = (user, room) => {
+//   userInfo = {
+//     CurrentUser: user.nickname,
+//     _id: room._id,
+//     roomType: room.roomType,
+//   };
+//   fetch(`/api/leave/room`, {
+//     method: "PATCH",
+//     body: JSON.stringify(userInfo),
+//     headers: {
+//       Accept: "application/json",
+//       "Content-Type": "application/json",
+//     },
+//   })
+//     .then((res) => res.json())
+//     .then((json) => {
+//       const { status, error } = json;
+//       console.log("status: ", status, "Error:", error);
+//     })
+//     .catch(console.log("error has occured"));
+// };
 // this function patches songs to the room songs array in mongodb
 export const handleAddSong = (song, roomType, _id) => {
   let songInfo = {};

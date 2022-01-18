@@ -169,14 +169,20 @@ const leaveRoom = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   try {
     const conn = await activateConn(client, req.body.roomType);
+    console.log("RemoveUser");
     const roomQuery = { _id: req.body._id };
-    const newRoomUser = {
-      $unSet: {
-        roomUsers: req.body.currentUser,
+    const removeUser = {
+      $pull: {
+        roomUsers: {
+          userName: req.body.currentUser,
+        },
       },
     };
-    const result = await conn.updateOne(roomQuery, newRoomUser);
-    res.status(200).json({ status: 200, updatedRoom: result });
+    const result = await conn.updateMany(roomQuery, removeUser);
+    res.status(200).json({
+      status: 200,
+      updatedRoom: result,
+    });
   } catch (error) {
     res.status(400).json({ status: 400, message: " server Error " });
   } finally {

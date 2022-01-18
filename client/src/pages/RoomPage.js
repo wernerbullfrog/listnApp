@@ -49,7 +49,7 @@ const Room = () => {
       .then((data) => {
         setCurrentRoom(data.result);
       });
-  }, [playingTrack, currentRoom]);
+  }, [playingTrack]);
 
   return (
     <>

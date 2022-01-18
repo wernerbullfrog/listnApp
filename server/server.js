@@ -30,7 +30,7 @@ express()
   .post("/api/:roomType", addRoom)
   .patch("/api/rooms", joinRoom)
   .patch("/api/addSong", addSong)
-  .patch("/api/rooms", leaveRoom)
+  .patch("/api/leave/room", leaveRoom)
   //SPOTIFY ENDPOINTS
   .get("/auth/login", requestUserAuth)
   .get("/callback/:code", requestAccessToken)
