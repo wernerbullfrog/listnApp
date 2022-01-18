@@ -3,13 +3,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LinearProgress from "@mui/material/LinearProgress";
 import { RoomContext } from "../Contexts/RoomContext";
 // compoonents
-import LoginBtn from "../Buttons/LoginBtn";
-import LogoutButton from "../Buttons/LogOutBtn";
+
 import CreateRoomBtn from "../Buttons/CreateRoomBtn";
 import RoomCreationModal from "../Modals/RoomCreationModal";
 import RoomCarousel from "./RoomCarousel";
 //styles
-import { PageContainer, PageWrapper } from "../ComponentStylings/PageStyles";
+import {
+  PageContainer,
+  PageWrapper,
+  WelcomeWrapper,
+} from "../ComponentStylings/PageStyles";
 
 const LandingPage = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -20,32 +23,36 @@ const LandingPage = () => {
   } = useContext(RoomContext);
 
   useEffect(() => {
-    // if (user) {
-    fetch(`/api/rooms/`)
-      .then((res) => res.json())
-      .then((data) => {
-        receiveRoomsFromServer(data);
-      });
-    // } else {
-    //   fetch(`/api/rooms/public`)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       receiveRoomsFromServer(data);
-    //     });
-    // }
+    if (user) {
+      fetch(`/api/rooms/`)
+        .then((res) => res.json())
+        .then((data) => {
+          receiveRoomsFromServer(data);
+        });
+    } else {
+      fetch(`/api/rooms/public`)
+        .then((res) => res.json())
+        .then((data) => {
+          receiveRoomsFromServer(data);
+        });
+    }
   }, [isAuthenticated]);
   return Rooms ? (
     <PageContainer>
       <PageWrapper>
-        {!isAuthenticated && <LoginBtn />}
         {isAuthenticated && (
           <>
-            <CreateRoomBtn setModalOpen={setModalOpen} />
-            <RoomCreationModal
-              modalOpen={modalOpen}
-              setModalOpen={setModalOpen}
-            />
-            <LogoutButton />
+            <WelcomeWrapper>
+              <h3>
+                Welcome back listn'r now that you're logged in you can join a
+                private room or create new one!
+              </h3>
+              <CreateRoomBtn setModalOpen={setModalOpen} />
+              <RoomCreationModal
+                modalOpen={modalOpen}
+                setModalOpen={setModalOpen}
+              />
+            </WelcomeWrapper>
           </>
         )}
         <RoomCarousel user={user} Rooms={Rooms} />

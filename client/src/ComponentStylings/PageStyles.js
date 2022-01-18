@@ -40,6 +40,17 @@ export const ProfileWrapper = styled.div`
   justify-content: space-around;
 `;
 
+export const WelcomeWrapper = styled.div`
+  width: 75vw;
+  height: fit-content;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  top: -3em;
+`;
+
 export const BasicWrapper = styled.div``;
 
 //******************************************/
