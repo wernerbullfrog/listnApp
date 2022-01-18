@@ -17,16 +17,18 @@ const JoinBtn = ({ room, setModalOpen }) => {
   // opens the passcode modal
 
   const handleClick = () => {
-    room.roomUsers.forEach((roomUser) => {
-      allowedUser = roomUser.userName === user.nickname;
-    });
+    if (room.roomType === "public" && !user) {
+      navigate(`/${room.roomType}/${room._id}`);
+    }
     if (room.roomType === "private") {
+      room.roomUsers.forEach((roomUser) => {
+        allowedUser = roomUser.userName === user.nickname;
+      });
       if (allowedUser) {
         navigate(`/${room.roomType}/${room._id}`);
       } else {
         setModalOpen(true);
       }
-    } else {
       if (allowedUser) {
         navigate(`/${room.roomType}/${room._id}`);
       } else {
@@ -37,7 +39,7 @@ const JoinBtn = ({ room, setModalOpen }) => {
   };
   return (
     <>
-      {user ? (
+      {user || room.roomType === "public" ? (
         <ModalCardBtn
           onClick={() => {
             handleClick();

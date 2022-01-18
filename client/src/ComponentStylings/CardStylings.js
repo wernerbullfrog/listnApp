@@ -1,22 +1,24 @@
 import styled from "styled-components";
 
-export const CarouselContainer = styled.ul`
+export const CarouselContainer = styled.div`
   display: flex;
   justify-content: center;
   height: 300px;
-  width: 1000px;
+  width: 90vw;
   top: 60px;
   scroll-behavior: smooth;
+  overflow: show;
+  overflow: scroll;
 `;
 
-export const CardWrapper = styled.li`
+export const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   margin: 10px;
   height: 280px;
-  width: 300px;
+  min-width: 300px;
   background-color: #17141d;
   border-radius: 50px;
   box-shadow: -1rem 0 3rem #000;

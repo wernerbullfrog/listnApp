@@ -20,19 +20,19 @@ const LandingPage = () => {
   } = useContext(RoomContext);
 
   useEffect(() => {
-    if (user) {
-      fetch(`/api/rooms/`)
-        .then((res) => res.json())
-        .then((data) => {
-          receiveRoomsFromServer(data);
-        });
-    } else {
-      fetch(`/api/rooms/public`)
-        .then((res) => res.json())
-        .then((data) => {
-          receiveRoomsFromServer(data);
-        });
-    }
+    // if (user) {
+    fetch(`/api/rooms/`)
+      .then((res) => res.json())
+      .then((data) => {
+        receiveRoomsFromServer(data);
+      });
+    // } else {
+    //   fetch(`/api/rooms/public`)
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       receiveRoomsFromServer(data);
+    //     });
+    // }
   }, [isAuthenticated]);
   return Rooms ? (
     <PageContainer>
