@@ -51,6 +51,10 @@ export const WelcomeWrapper = styled.div`
   top: -3em;
 `;
 
+export const TextWrapper = styled.div`
+  width: 40vw;
+`;
+
 export const BasicWrapper = styled.div``;
 
 //******************************************/

@@ -12,6 +12,7 @@ import {
   PageContainer,
   PageWrapper,
   WelcomeWrapper,
+  TextWrapper,
 } from "../ComponentStylings/PageStyles";
 
 const LandingPage = () => {
@@ -40,20 +41,29 @@ const LandingPage = () => {
   return Rooms ? (
     <PageContainer>
       <PageWrapper>
-        {isAuthenticated && (
-          <>
-            <WelcomeWrapper>
+        {isAuthenticated ? (
+          <WelcomeWrapper>
+            <TextWrapper>
               <h3>
                 Welcome back listn'r now that you're logged in you can join a
                 private room or create new one!
               </h3>
-              <CreateRoomBtn setModalOpen={setModalOpen} />
-              <RoomCreationModal
-                modalOpen={modalOpen}
-                setModalOpen={setModalOpen}
-              />
-            </WelcomeWrapper>
-          </>
+            </TextWrapper>
+            <CreateRoomBtn setModalOpen={setModalOpen} />
+            <RoomCreationModal
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+            />
+          </WelcomeWrapper>
+        ) : (
+          <WelcomeWrapper>
+            <TextWrapper>
+              <h3>
+                Welcome to listn' login to join private rooms or even create
+                your own!
+              </h3>
+            </TextWrapper>
+          </WelcomeWrapper>
         )}
         <RoomCarousel user={user} Rooms={Rooms} />
       </PageWrapper>
